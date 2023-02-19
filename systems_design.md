@@ -2,7 +2,7 @@
 https://github.com/donnemartin/system-design-primer
 
 ## Scalability
----
+
 Topics
 - **Vertical** scaling: better machines
 - **Horizontal scaling**: more machines
@@ -20,7 +20,7 @@ Resources
 - [Scalability for dummies](https://web.archive.org/web/20220530193926/https://www.lecloud.net/tagged/scalability)
 
 ## High level trade-offs
----
+
 Performance vs scalability
 - Performance: fast for a single user
 - Scalability: fast for a heavy load of users
