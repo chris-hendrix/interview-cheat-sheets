@@ -60,4 +60,10 @@ Availability vs consistency (CAP theorem, see below)
   - Series: `A = A(1) * A(2)`
   - Parallel: `A = (1 - A(1)) * (1 - A(2))`
 
+## Domain name system (DNS)
+- Maps domain name to IPv4 address (user goes to google.com -> DNS returns IPv4 > page loads)
+- ISP (for example) has cache, on miss, go to root DNS server
+- Managed DNS services (CloudFlare) can route traffic via round robin, latency times, and geo-location
+- Disadvantages: slight delay, DNS servers are complex and managed by large entities, DDoS attacks
+
 
