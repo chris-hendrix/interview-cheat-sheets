@@ -66,4 +66,23 @@ Availability vs consistency (CAP theorem, see below)
 - Managed DNS services (CloudFlare) can route traffic via round robin, latency times, and geo-location
 - Disadvantages: slight delay, DNS servers are complex and managed by large entities, DDoS attacks
 
+## Content delivery network (CDN)
+- Proxy servers that store static content (HTML photos)
+- Benefits: content from nearby servers, reduces load on your servers
+- Disadvantages: costly, stale data (TTL too long), change URL to point to static content
+- Push CDN: 1) updates with server changes, 2) good for small traffic with slow changing content
+- Pull CDN: 1) updates when first user requests content, then cached (expires after set time, TTL), 2) can be redundant (expiration but not updated), 3) good for high traffic 
 
+
+## Load balancer
+- Distribute incoming traffic to appropriate servers AND/OR databases
+- Benefits
+  - Stops traffic from unhealthy/overloaded resources
+  - Eliminates single point of failure
+  - Can decrypt/encrypt at interface rather than downstream
+  - Can keep track of sessions (cookies) if server doesn't
+- Methods: random, least loaded, session/cookies, round robin, weighted RR
+- Layer 4: middleman that isolates client and server ports, keeps mapping table (client/server) to determine ports, does not read packet data
+  - Advantages: Simpler, efficient, NAT (switches client/server to correct port)
+  - Disadvantages: not smart, no microservices, no cache (need to know content)
+  - Layer 7
