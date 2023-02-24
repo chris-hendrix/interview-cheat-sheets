@@ -82,7 +82,12 @@ Availability vs consistency (CAP theorem, see below)
   - Can decrypt/encrypt at interface rather than downstream
   - Can keep track of sessions (cookies) if server doesn't
 - Methods: random, least loaded, session/cookies, round robin, weighted RR
-- Layer 4: middleman that isolates client and server ports, keeps mapping table (client/server) to determine ports, does not read packet data
-  - Advantages: Simpler, efficient, NAT (switches client/server to correct port)
-  - Disadvantages: not smart, no microservices, no cache (need to know content)
-  - Layer 7
+- Allows horizontal scaling: great, but adds complexity (more servers, more updating)
+- Disadvantages: can become a bottleneck, increases complexity, can be single point of failure
+- **Layer 4**: middleman that looks at ports, keeps mapping table (client/server) to determine ports, does not read packet data
+  - Pros: Simpler, efficient, NAT (switches client/server to correct port)
+  - Cons: not smart, no microservices, no cache (need to know content)
+- **Layer 7**: middleman that looks at data, directs to server based on the data
+  - Pros: smart, caching, microservices
+  - Cons: expensive (looks at data), terminates TLS (decrypts), two TCP connections
+- [Layer 4 vs Layer 7](https://youtu.be/aKMLgFVxZYk)
