@@ -74,7 +74,7 @@ Availability vs consistency (CAP theorem, see below)
 - Pull CDN: 1) updates when first user requests content, then cached (expires after set time, TTL), 2) can be redundant (expiration but not updated), 3) good for high traffic 
 
 
-## Load balancer
+## Load balancer, reverse-proxy
 - Distribute incoming traffic to appropriate servers AND/OR databases
 - Benefits
   - Stops traffic from unhealthy/overloaded resources
@@ -90,4 +90,21 @@ Availability vs consistency (CAP theorem, see below)
 - **Layer 7**: middleman that looks at data, directs to server based on the data
   - Pros: smart, caching, microservices
   - Cons: expensive (looks at data), terminates TLS (decrypts), two TCP connections
-- [Layer 4 vs Layer 7](https://youtu.be/aKMLgFVxZYk)
+- **Reverse proxy**: basically a Layer 7 load balancer but also useful for just one server, NGINX
+- Resources:
+  - [Layer 4 vs Layer 7](https://youtu.be/aKMLgFVxZYk)
+
+## Web application architecture (microservices)
+- Web request process
+  1. **Client** visits amazon.com
+  2. **Presentation layer** serves the frontend files (HTML)
+  3. **Business layer** handles API requests, serves data
+- Separate web layer from platform (business logic) layer
+  - Pros: independently scalable, reduces redundant code, can separate heavy calcs from serving the frontend
+  - Cons: more complex, not available in a monolith
+- **Microservices**: bunch of independent platform layer servers doing different things
+- **Zookeeper**: microservice manager used for heavy reading among many business layer servers
+- Resources
+  - [Web Application Architecture: How the Web Works](https://www.altexsoft.com/blog/engineering/web-application-architecture-how-the-web-works/)
+  - [NextJs Application Architecture for best performance](https://medium.com/@sushinpv/nextjs-application-architecture-for-best-performance-8f1d22e33ba1)
+  - [Introduction to Apache ZooKeeper](https://www.allprogrammingtutorials.com/tutorials/introduction-to-apache-zookeeper.php)
