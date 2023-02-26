@@ -103,7 +103,7 @@ Availability vs consistency (CAP theorem, see below)
   - Pros: independently scalable, reduces redundant code, can separate heavy calcs from serving the frontend
   - Cons: more complex, not available in a monolith
 - **Microservices**: bunch of independent platform layer servers doing different things
-- **Zookeeper**: microservice manager used for heavy reading among many business layer servers
+- **Service discovery**: help services find each other by keeping track of registered names, addresses, and ports by using in memory key-value store (ie Zookeeper)
 - Resources
   - [Web Application Architecture: How the Web Works](https://www.altexsoft.com/blog/engineering/web-application-architecture-how-the-web-works/)
   - [NextJs Application Architecture for best performance](https://medium.com/@sushinpv/nextjs-application-architecture-for-best-performance-8f1d22e33ba1)
