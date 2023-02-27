@@ -121,7 +121,8 @@ Scaling techniques
 - Replication
   - **Master-slave replication**: read/write to master, read from slaves
   - **Master-master replication**: read/write to both masters, update/replicate between them
-  - Cons
+  - *Pros*: provides failover, multiple master provides HA
+  - *Cons*
     - loss of writes if master fails before replication
     - writes are replayed to replicas, which could slow reads
     - more slaves = more replication = more lag
@@ -130,5 +131,25 @@ Scaling techniques
     - *Master-master*: violates ACID (loosely consistent while updating), need load balancer, conflict resolution increases as write nodes increase (increases latency)
 - Federation
   - Splits dbs by function (ie forums, users, and products)
-  - *Pros*: less read/write traffic to each, less replication lag, writes can happen in parallel (increasing throughput), more manageable cache for each
+  - *Pros*: less read/write traffic to each, less replication lag, writes can happen in parallel (increasing throughput), more manageable cache for each (more cache hits)
   - *Cons*: not effective for all schemas (ie one table way larger than other), additional code for logic, joins need a server link, more hardware and complexity
+- Sharding
+  - Splits dbs by subsets of the same table (horizontal, ie moving rows to different dbs)
+  - Can split users by name (A-F, G-Y), geolocation, or consistent hashing (random)
+  - *Pros*: similar to federation
+  - *Cons*: bunch of power users could be on a single shard, joins and redistribution are complex
+- Denormalization
+  - *Pros*: improves read performance by eliminating expensive joins with redundant data
+  - *Cons*: duplicate data that needs to be synced, might perform worse than normalized if write-heavy
+  - [Materialized views](https://en.wikipedia.org/wiki/Materialized_view) can keep data up to date
+- SQL tuning
+  - Uncover and fix bottleneck queries
+  - **Benchmark** by simulating high load, **profile** by using slow query log
+  - Strategies
+    - Tighten schema: use `VARCHAR` instead of `CHAR`, store locations of blobs, etc
+    - Use good indices: allows for faster joins (B-tree), could slow writes (index generation)
+    - Avoid expensive joins: denormalize where necessary
+    - Partition tables: put table hot spots in a different table to keep it in memory
+    - Tune the query cache: query is the key, result is the value, could cause performance issues, good for data that doesn't change often
+
+### NoSQL
