@@ -108,3 +108,27 @@ Availability vs consistency (CAP theorem, see below)
   - [Web Application Architecture: How the Web Works](https://www.altexsoft.com/blog/engineering/web-application-architecture-how-the-web-works/)
   - [NextJs Application Architecture for best performance](https://medium.com/@sushinpv/nextjs-application-architecture-for-best-performance-8f1d22e33ba1)
   - [Introduction to Apache ZooKeeper](https://www.allprogrammingtutorials.com/tutorials/introduction-to-apache-zookeeper.php)
+
+## Database
+### SQL
+**ACID** is a set of properties of relational database transactions (CRUD)
+- **Atomicity**: transaction succeeds or fails completely
+- **Consistency**: transaction keeps db state valid (ie cascade deleting)
+- **Isolation**: concurrent transactions have same results as if they occurred sequentially
+- **Durability**: save/recoverable after each transaction
+
+Scaling techniques
+- Replication
+  - **Master-slave replication**: read/write to master, read from slaves
+  - **Master-master replication**: read/write to both masters, update/replicate between them
+  - Cons
+    - loss of writes if master fails before replication
+    - writes are replayed to replicas, which could slow reads
+    - more slaves = more replication = more lag
+    - more complexity
+    - *Master-slave*: takes time to promote slave
+    - *Master-master*: violates ACID (loosely consistent while updating), need load balancer, conflict resolution increases as write nodes increase (increases latency)
+- Federation
+  - Splits dbs by function (ie forums, users, and products)
+  - *Pros*: less read/write traffic to each, less replication lag, writes can happen in parallel (increasing throughput), more manageable cache for each
+  - *Cons*: not effective for all schemas (ie one table way larger than other), additional code for logic, joins need a server link, more hardware and complexity
