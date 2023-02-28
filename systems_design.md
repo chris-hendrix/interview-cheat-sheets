@@ -153,3 +153,23 @@ Scaling techniques
     - Tune the query cache: query is the key, result is the value, could cause performance issues, good for data that doesn't change often
 
 ### NoSQL
+- Data is denormalized, joins done in the codebase
+- Favors **BASE** over ACID
+  - **Basically available**: availability guaranteed
+  - **Soft state**: state could change without transactions because of
+  - **Eventual consistency**: without input, the system will become consistent
+- Types
+  - **Key-value store**: hash table, used for in-memory cache (Redis) 
+  - **Document store**: key-value store with documents (ie JSON) stored as values, allows for "column" flexibility, some providers (MongoDB) provide a query language
+  - **Wide column store**: nested mapping using column families, offers HA and scalability, `value=data[row][super_col][sub_col]`
+  - **Graph database**: graph used to optimize many-to-many relationships, nodes contain the data, main use is social networks (ie aggregate number of friends)
+- SQL vs NoSQL
+
+| SQL | NoSQL |
+| --- | --- |
+| Structured data | Semi-structured data |
+| Strict schema | Dynamic schema |
+| Relational data | Non-relational |
+| Complex joins | No complex joins |
+| Clear patterns for scaling | Store many TBs of data |
+
