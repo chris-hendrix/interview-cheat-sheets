@@ -165,11 +165,18 @@ Scaling techniques
   - **Graph database**: graph used to optimize many-to-many relationships, nodes contain the data, main use is social networks (ie aggregate number of friends)
 - SQL vs NoSQL
 
-| SQL | NoSQL |
-| --- | --- |
-| Structured data | Semi-structured data |
-| Strict schema | Dynamic schema |
-| Relational data | Non-relational |
-| Complex joins | No complex joins |
-| Clear patterns for scaling | Store many TBs of data |
+  | Reasons for SQL | Reasons for NoSQL |
+  | --- | --- |
+  | Data is structured/relational, schema is strict, requires complex joins | Data is not structured/relational, schema is strict, requires complex joins |
+  | Data can be scaled using SQL scaling patterns | Data needs versatile options for scaling |
+  | Don't need to handle PBs of data | Need to handle PBs of data |
+  | Want established documentation and design patterns | Do not want as established documentation and design patterns | 
+  | Data workload is not super-heavy | Data workload is heavy |
+  | Don't need to handle heavy read/writes with a large dataset | Need to handle heavy read/writes with a large dataset |
+- Applications for NoSQL
+  - Rapid ingest of log data
+  - Leaderboard data (Redis sorted set)
+  - Temporary data (shopping card)
+  - Frequently accessed tables
+  - Metadata/lookup tables
 
