@@ -180,3 +180,26 @@ Scaling techniques
   - Frequently accessed tables
   - Metadata/lookup tables
 
+## Cache
+### Strategies
+- Goal: balance reads/writes across all partitions
+- Strategies: client (browser), CDN, web server (ie page content via reverse-proxy like NGINX), database (some cache natively in default config), application (see below)
+- Application caching: key-value store (Redis) in RAM (faster than disk) between app and db, uses algorithms (LRU) to invalidate cold data and keep hot data in ram
+- **Caching db queries**: query is the key, cons: hard to handle complex queries, data change might invalidate a bunch of cached queries
+- **Caching app objects**: assemble objects from db, remove object from cache if data has changed, async processing, examples: user sessions, rendered pages
+- **Cons**: maintain consistency between cache and db, updating the cache is a complex problem
+
+### Updating
+- **Read through, cache-aside (lazy loading)**: check cache, miss, read data, then store in cache
+  - Pros: fast reads, only requested data which limits cache storage
+  - Cons: miss results in 3 trips (delays), data can become stale unless using TTL, node failure clears out everything
+- **Write-through**: app uses cache as the main db, app writes to cache, cache then writes to db
+  - Pros: fast reads (but slow updates after write), data is not stale
+  - Cons: node failure clears everything, most data written may never be read (mitigated with TTL)
+- **Write-behind/back**: write to cache, write hits queue, write asynchronously to db
+  - Pros: improves write performance
+  - Cons: data loss if failure while things are in queue, more complex than others
+- **Refresh ahead**: db updates cache before expiration based on prediction
+  - Pros: can reduce latency vs read-through
+  - Cons: bad predictions make it worse than no cache
+
