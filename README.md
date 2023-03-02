@@ -1,5 +1,9 @@
-# dsa
-Cheat sheet for data structures and algorithms.
+# Interview cheat sheets
+Cheat sheets for 
+- data structures and algorithms
+- systems design
+### Resources
+- [System design primer](https://github.com/donnemartin/system-design-primer)
 ### Install
 Setup venv
 ```

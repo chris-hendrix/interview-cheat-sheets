@@ -203,3 +203,8 @@ Scaling techniques
   - Pros: can reduce latency vs read-through
   - Cons: bad predictions make it worse than no cache
 
+
+## Asynchronism
+- **Message queue**: user tweets -> hits queue (but maybe appears on own user's view) -> message is processed and other users can view the tweet
+- **Task queue**: queue is built and then tasks are fired (ie sending a bunch of emails)
+- **Back pressure**: resistance to the flow of data, if server receives 100rps from client, but can only process 75rps, need to limit the client
