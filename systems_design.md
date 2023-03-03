@@ -208,3 +208,14 @@ Scaling techniques
 - **Message queue**: user tweets -> hits queue (but maybe appears on own user's view) -> message is processed and other users can view the tweet
 - **Task queue**: queue is built and then tasks are fired (ie sending a bunch of emails)
 - **Back pressure**: resistance to the flow of data, if server receives 100rps from client, but can only process 75rps, need to limit the client
+- **Cons**: queues for small calcs add delays and complexity
+
+## Communication
+- **HTTP (hypertext transfer protocol)**: protocol for communication between client and server
+- **TCP (transmission control protocol)**: connection between sender/receiver over an IP network, terminated via two way handshake
+  - Reliability over speed (guaranteed to reach destination in order)
+  - Examples: chat (Whatsapp), FTP, SMTP (emails)
+- **UDP (user datagram protocol)**: connectionless, datagrams (like packets) might reach destination
+  - Speed over reliability
+  - Examples: online games, DNS, streaming, live broadcasts (Zoom)
+- **RPC (remote procedure call)**: 
