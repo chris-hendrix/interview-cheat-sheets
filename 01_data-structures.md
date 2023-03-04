@@ -3,12 +3,12 @@
 ## Big O
 | | index | search | opt search | insert| append | sort |
 | --- | --- | --- | --- | --- | --- | --- |
-| array | **`O(1)`** | `O(n)` | `O(logn)` | `n/a` | `n/a` | `O(n*logn)` |
-| dynamic array | **`O(1)`** | `O(n)` | `O(logn)` | `O(n)` | **`O(1)`** | `O(n*logn)` |
+| array | **`O(1)`** | `O(n)` | **`O(logn)`** | `n/a` | `n/a` | `O(n*logn)` |
+| dynamic array | **`O(1)`** | `O(n)` | **`O(logn)`** | `O(n)` | **`O(1)`** | `O(n*logn)` |
 | linked list | `O(n)` | `O(n)` | `O(n)` | `O(n)` | **`O(1)`** | `O(n*logn)` |
-| hash | **`O(1)`** | **`O(1)`** | **`O(1)`** | **`O(1)`** | `n/a` | `O(n*logn)` |
-| binary tree | `O(logn)` | `O(logn)` | `O(logn)` | `O(logn)` | `O(logn)` | **`O(n)`** |
-| min heap | `O(logn)` | `O(logn)` | `O(logn)` | `O(logn)` | `O(logn)` | `O(n*logn)` |
+| hash | **`O(1)`** | `O(n)` | `O(n)` | **`O(1)`** | `n/a` | `O(n*logn)` |
+| binary tree | `O(logn)` | **`O(logn)`** | **`O(logn)`** | `O(logn)` | `O(logn)` | **`O(n)`** |
+| min heap | `O(logn)` | **`O(logn)`** | **`O(logn)`** | `O(logn)` | `O(logn)` | `O(n*logn)` |
 
 ## Arrays
 ### Overview

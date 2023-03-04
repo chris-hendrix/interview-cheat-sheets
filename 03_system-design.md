@@ -1,4 +1,4 @@
-# Systems Design
+# System Design
 Resources:
 - [System design primer](https://github.com/donnemartin/system-design-primer)
 - [Harvard lecture](https://www.youtube.com/watch?v=-W9F__D3oY4)
