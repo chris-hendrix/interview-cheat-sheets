@@ -4,6 +4,7 @@
     "datagram",
     "datagrams",
     "denormalize",
-    "geolocation"
+    "geolocation",
+    "matplotlib"
   ]
 }

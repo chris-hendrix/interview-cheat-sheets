@@ -15,3 +15,5 @@ source venv/bin/activate
 pip install --upgrade pip
 pip install flake8
 pip install numpy
+pip install networkx
+pip install matplotlib
