@@ -1,25 +1,10 @@
 # Systems Design
-https://github.com/donnemartin/system-design-primer
-
-## Scalability
-
-Topics
-- **Vertical** scaling: better machines
-- **Horizontal scaling**: more machines
-- **Caching**: separate key value db
-- **Load balancing**: redirects traffic (at global, dns, db, etc.)
-- **Database replication**: master/slaves (multiple masters = HA)
-- **Database partitioning**: two masters with LB at db layer
-- **Clones**: outsource sessions to db and clone server
-- **Databases**: scale SQL vertically and horizontally (read from slaves, write to master), or denormalize from start with NoSQL and cache 
-- **Caches**: use independent in-memory cache (Redis), object-based caching preferred over query-based (easier to detect changes in data)
-- **Asynchronism**: pre-rendering html, heavy jobs done in the background (like amazon compiling your list of transactions to export)
-
-Resources
+Resources:
+- [System design primer](https://github.com/donnemartin/system-design-primer)
 - [Harvard lecture](https://www.youtube.com/watch?v=-W9F__D3oY4)
 - [Scalability for dummies](https://web.archive.org/web/20220530193926/https://www.lecloud.net/tagged/scalability)
 
-## High level trade-offs
+## [High level trade-offs](https://github.com/donnemartin/system-design-primer#performance-vs-scalability)
 
 Performance vs scalability
 - Performance: fast for a single user
@@ -32,7 +17,7 @@ Latency vs throughput
 
 Availability vs consistency (CAP theorem, see below)
 
-## CAP Theorem
+## [CAP Theorem](https://github.com/donnemartin/system-design-primer#availability-vs-consistency)
 ### Availability vs consistency
 - Request data from one of two servers, choose two of three (C/P or A/P)
   1. **(C)onsitency**: up-to-date data or error
@@ -60,13 +45,13 @@ Availability vs consistency (CAP theorem, see below)
   - Series: `A = A(1) * A(2)`
   - Parallel: `A = (1 - A(1)) * (1 - A(2))`
 
-## Domain name system (DNS)
+## [DNS (domain name system)](https://github.com/donnemartin/system-design-primer#domain-name-system)
 - Maps domain name to IPv4 address (user goes to google.com -> DNS returns IPv4 > page loads)
 - ISP (for example) has cache, on miss, go to root DNS server
 - Managed DNS services (CloudFlare) can route traffic via round robin, latency times, and geo-location
 - Disadvantages: slight delay, DNS servers are complex and managed by large entities, DDoS attacks
 
-## Content delivery network (CDN)
+## [CDN (content delivery network)](https://github.com/donnemartin/system-design-primer#content-delivery-network)
 - Proxy servers that store static content (HTML photos)
 - Benefits: content from nearby servers, reduces load on your servers
 - Disadvantages: costly, stale data (TTL too long), change URL to point to static content
@@ -74,7 +59,7 @@ Availability vs consistency (CAP theorem, see below)
 - Pull CDN: 1) updates when first user requests content, then cached (expires after set time, TTL), 2) can be redundant (expiration but not updated), 3) good for high traffic 
 
 
-## Load balancer, reverse-proxy
+## [Load balancer, reverse-proxy](https://github.com/donnemartin/system-design-primer#load-balancer)
 - Distribute incoming traffic to appropriate servers AND/OR databases
 - Benefits
   - Stops traffic from unhealthy/overloaded resources
@@ -94,7 +79,7 @@ Availability vs consistency (CAP theorem, see below)
 - Resources:
   - [Layer 4 vs Layer 7](https://youtu.be/aKMLgFVxZYk)
 
-## Web application architecture (microservices)
+## [Web application architecture (microservices)](https://github.com/donnemartin/system-design-primer#application-layer)
 - Web request process
   1. **Client** visits amazon.com
   2. **Presentation layer** serves the frontend files (HTML)
@@ -109,7 +94,7 @@ Availability vs consistency (CAP theorem, see below)
   - [NextJs Application Architecture for best performance](https://medium.com/@sushinpv/nextjs-application-architecture-for-best-performance-8f1d22e33ba1)
   - [Introduction to Apache ZooKeeper](https://www.allprogrammingtutorials.com/tutorials/introduction-to-apache-zookeeper.php)
 
-## Database
+## [Database](https://github.com/donnemartin/system-design-primer#database)
 ### SQL
 **ACID** is a set of properties of relational database transactions (CRUD)
 - **Atomicity**: transaction succeeds or fails completely
@@ -180,7 +165,7 @@ Scaling techniques
   - Frequently accessed tables
   - Metadata/lookup tables
 
-## Cache
+## [Cache](https://github.com/donnemartin/system-design-primer#cache)
 ### Strategies
 - Goal: balance reads/writes across all partitions
 - Strategies: client (browser), CDN, web server (ie page content via reverse-proxy like NGINX), database (some cache natively in default config), application (see below)
@@ -210,7 +195,7 @@ Scaling techniques
 - **Back pressure**: resistance to the flow of data, if server receives 100rps from client, but can only process 75rps, need to limit the client
 - **Cons**: queues for small calcs add delays and complexity
 
-## Communication
+## [Communication](https://github.com/donnemartin/system-design-primer#communication)
 - **HTTP (hypertext transfer protocol)**: protocol for communication between client and server
 - **TCP (transmission control protocol)**: connection between sender/receiver over an IP network, terminated via two way handshake
   - Reliability over speed (guaranteed to reach destination in order)
@@ -218,4 +203,13 @@ Scaling techniques
 - **UDP (user datagram protocol)**: connectionless, datagrams (like packets) might reach destination
   - Speed over reliability
   - Examples: online games, DNS, streaming, live broadcasts (Zoom)
-- **RPC (remote procedure call)**: 
+- **RPC (remote procedure call)**: client's code calls function that runs on another server
+  - more control how client accesses data, altho clients become tightly coupled to server
+  - REST is probably the better option
+- **REST (representational state transfer)**: focused on exposing data and minimizes the coupling between client/server
+  - Cons: client may need multiple round trips to render, payload may increase over time
+
+## [Security](https://github.com/donnemartin/system-design-primer#security)
+- Encrypt in transit and at rest
+- Sanitize user input to prevent XSS (injecting scripts into sent input) and SQL injection (sanitized by using query parameters)
+- Give users the least privilege
