@@ -84,7 +84,7 @@ def merge_sort(arr):
     merge(left, right, arr)
 ```
 
-### Quick sort
+### Quicksort
 - moves each element before or after a random pivot (recursion)
 - partition function rearranges and returns the partition index
 ```
@@ -96,6 +96,17 @@ def quicksort(arr, start=None, end=None):
     p = partition(arr, start, end)
     quicksort(arr, start, p-1)
     quicksort(arr, p+1, end)
+```
+
+### Dynamic programming
+- Fibonacci creates runs in `O(2^n)` (two branches per node), DP improves it to `O(n)`
+```
+def fib_dp(n, memo={}):
+    if n < 2:
+        return n
+    if not n in memo:
+        memo[n] = fib_dp(n - 1) + fib_dp(n - 2)
+    return memo[n]
 ```
 
 
