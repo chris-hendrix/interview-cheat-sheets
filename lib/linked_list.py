@@ -1,4 +1,4 @@
-class Node:
+class ListNode:
     def __init__(self, val=None, next=None, head=True):
         if head:
             self.head = self
@@ -7,7 +7,7 @@ class Node:
         self.prev = None
 
     def move_next(self):
-        self.next = Node()
+        self.next = ListNode()
         self.next.head = self.head
         self.prev = self
         return self.next
@@ -19,3 +19,15 @@ class Node:
             arr.append(str(node.val))
             node = node.next
         return f'({"->".join(arr)})'
+
+
+class LinkedList:
+    @staticmethod
+    def create_from_arr(arr):
+        if not arr or len(arr) < 0:
+            return None
+        head = node = ListNode(arr[0])
+        for val in arr[1:]:
+            node.next = ListNode(val)
+            node = node.next
+        return head
