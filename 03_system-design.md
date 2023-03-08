@@ -3,17 +3,24 @@ Resources:
 - [System design primer](https://github.com/donnemartin/system-design-primer)
 - [Harvard lecture](https://www.youtube.com/watch?v=-W9F__D3oY4)
 - [Scalability for dummies](https://web.archive.org/web/20220530193926/https://www.lecloud.net/tagged/scalability)
+- [Back of the envelope](http://highscalability.com/blog/2011/1/26/google-pro-tip-use-back-of-the-envelope-calculations-to-choo.html)
+
+## [Approach](https://github.com/donnemartin/system-design-primer#how-to-approach-a-system-design-interview-question)
+1. **Use cases and assumptions**: how many users, how much data, read vs write, requests per second
+2. **High level design**: sketch components and justify
+3. **Design core components**: SQL vs NoSQL, db schema and objects, etc
+4. **Scale design**: add in load balancer, caching, sharding, etc, EVERYTHING is a tradeoff
 
 ## [High level trade-offs](https://github.com/donnemartin/system-design-primer#performance-vs-scalability)
 
-Performance vs scalability
+**Performance vs scalability**
 - Performance: fast for a single user
 - Scalability: fast for a heavy load of users
 
-Latency vs throughput
+**Latency vs throughput**
 - Latency: time between request and response
 - Throughput: requests per second
-- Aim for maximum throughput with acceptable latency
+- Aim for maximum throughput with acceptable latency (less than 100ms between client and server)
 
 Availability vs consistency (CAP theorem, see below)
 
@@ -213,3 +220,64 @@ Scaling techniques
 - Encrypt in transit and at rest
 - Sanitize user input to prevent XSS (injecting scripts into sent input) and SQL injection (sanitized by using query parameters)
 - Give users the least privilege
+
+## [Appendix](https://github.com/donnemartin/system-design-primer#appendix)
+
+### SQL data types
+```
+
+| Data type        | Lower               | Upper                      | Storage           |
+| ---------------- | ------------------- | -------------------------- | ----------------- |
+| Boolean (bit)    | 0                   | 1                          | 1 byte            |
+| Int              | ~-2mil (-2^31)      | ~+2mil (2^31)              | 4 bytes           |
+| Number (decimal) | up to 29 sigfigs    | up to 29 sigfigs           | 5 to 17 bytes     |
+| Date             | 0001-01-01          | 9999-12-31                 | 3 bytes           |
+| Datetime2        | 0001-01-01 00:00:00 | 9999-12-31 23:59:59.999... | 6 to 8 bytes      |
+| Char(n)          | 0 chars             | 8000 chars                 | n bytes           |
+| Varchar(n)       | 0 chars             | 8000 chars                 | n bytes + 2 bytes |                       |
+
+Notes:
+- Columns < 1 byte are stored as 1 byte (ie booleans)
+- 1 char = 1 byte (256 options for each char)
+- Varchars in MySQL store up to 65k chars
+```
+
+### Powers of two
+```
+Power           Exact Value         Approx Value        Bytes
+---------------------------------------------------------------
+7                             128
+8                             256
+10                           1024   1 thousand           1 KB
+16                         65,536                       64 KB
+20                      1,048,576   1 million            1 MB
+30                  1,073,741,824   1 billion            1 GB
+32                  4,294,967,296                        4 GB
+40              1,099,511,627,776   1 trillion           1 TB
+```
+
+### Latency
+```
+Latency Comparison Numbers
+--------------------------
+L1 cache reference                           0.5 ns
+Branch mispredict                            5   ns
+L2 cache reference                           7   ns                      14x L1 cache
+Mutex lock/unlock                           25   ns
+Main memory reference                      100   ns                      20x L2 cache, 200x L1 cache
+Compress 1K bytes with Zippy            10,000   ns       10 us
+Send 1 KB bytes over 1 Gbps network     10,000   ns       10 us
+Read 4 KB randomly from SSD*           150,000   ns      150 us          ~1GB/sec SSD
+Read 1 MB sequentially from memory     250,000   ns      250 us
+Round trip within same datacenter      500,000   ns      500 us
+Read 1 MB sequentially from SSD*     1,000,000   ns    1,000 us    1 ms  ~1GB/sec SSD, 4X memory
+HDD seek                            10,000,000   ns   10,000 us   10 ms  20x datacenter roundtrip
+Read 1 MB sequentially from 1 Gbps  10,000,000   ns   10,000 us   10 ms  40x memory, 10X SSD
+Read 1 MB sequentially from HDD     30,000,000   ns   30,000 us   30 ms 120x memory, 30X SSD
+Send packet CA->Netherlands->CA    150,000,000   ns  150,000 us  150 ms
+
+Notes:
+- 1 ns = 10^-9 seconds
+- 1 us = 10^-6 seconds = 1,000 ns
+- 1 ms = 10^-3 seconds = 1,000 us = 1,000,000 ns
+```
