@@ -109,4 +109,39 @@ def fib_dp(n, memo={}):
     return memo[n]
 ```
 
+### Bit manipulation
+- Operations
+    | Operation | Python | Notes
+    | --------------- | -----   | ------------------------------------------------- |
+    | **AND**         | `a & b` | Both are 1, then 1, otherwise 0                   |
+    | **OR**          | `a | b` | One is 1, then 1, otherwise 0                     |
+    | **XOR**         | `a ^ b` | Sum is 1 then 0, otherwise 1                      |
+    | **NOT**         | `~a `   | All are opposite                                  |
+    | **Left Shift**  | `a << n`| Arith shift left n spaces, fill with zeros (\*2n) |
+    | **Right Shift** | `a >> n`| Arith shift right n spaces, remove smaller (/2n)  |
 
+- **Two's complement**: leading zero represents positive/negative, to convert to negative: flip bits and add 1, then add switch leading bit to 1
+    | 4-bit | Unsigned | Signed |
+    | --- | --- | --- |
+    | `00` | `0` | `0` |
+    | `01` | `1` | `1` |
+    | `10` | `2` | `-1` |
+    | `11` | `3` | `0` |
+
+- Common functions
+```
+                                # i = 2
+def get_ith_bit(x, i):          # x = 1011 (7)
+    m = 1 << i                  # m = 0100 AND
+    return = x & m != 0         # r = 0000 != 0  (= false = 0)
+
+def set_ith_bit_to_one(x, i)    # x = 1011 (7)
+    m = 1 << i                  # m = 0100 OR
+    return x | m                # r = 1111
+
+def set_ith_bit_to_zero(x, i)   # x = 1111 (15)
+    m = 1 << i                  # m = 0100 NOT
+    m = ~m                      # m = 1011 AND
+    return m & m                # r = 1011
+
+```
