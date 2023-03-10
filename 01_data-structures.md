@@ -58,6 +58,7 @@ queue.popleft()  # gets from head
 ### Overview
 - Node with left and right node
 - Designed for searching and sorting
+- Maximum number of nodes (perfect) is `2^depth`
 - Types
   - **Binary search tree**: `left <= parent < right`, no duplicate nodes
   - **Balanced**: balanced enough for `O(logn)` traversal
