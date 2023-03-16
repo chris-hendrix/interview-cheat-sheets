@@ -110,7 +110,7 @@ def fib_dp(n, memo={}):
 ```
 
 ### Bit manipulation
-- Operations
+- **Operations**
     | Operation | Python | Notes
     | --------------- | -----   | ------------------------------------------------- |
     | **AND**         | `a & b` | Both are 1, then 1, otherwise 0                   |
@@ -127,8 +127,8 @@ def fib_dp(n, memo={}):
     | `01` | `1` | `1` |
     | `10` | `2` | `-1` |
     | `11` | `3` | `0` |
-
-- Common functions
+- **Hexadecimal**: base 16 (0-F, 0-F), 1 byte (8 bits), `0xFF = 16*16 = 1111111`
+- **Common functions**
 ```
                                 # i = 2
 def get_ith_bit(x, i):          # x = 1011 (7)
@@ -143,5 +143,4 @@ def set_ith_bit_to_zero(x, i)   # x = 1111 (15)
     m = 1 << i                  # m = 0100 NOT
     m = ~m                      # m = 1011 AND
     return m & m                # r = 1011
-
 ```
