@@ -19,7 +19,7 @@ def binary_search(x, arr):
 - **Complexity**: `O(logn)`
 ### BFS (trees, graphs)
 - Used for shortest path (no need to visit every node, shallow trees)
-- Uses recursion
+- Uses queue
 - More memory that depth first (queue storage)
 - **Complexity**
   - Trees (traversal): `O(n)` or `O(sqrtn)`/`O(logn)` for avg/balanced
@@ -40,7 +40,7 @@ def bfs(node):
 ```
 ### DFS (trees, graphs)
 - Used to visit every node (deep trees)
-- Uses queue
+- Uses recursion
 - **Complexity**
   - Trees (traversal): `O(n)` or `O(sqrtn)`/`O(logn)` for avg/balanced
   - Graphs: `O(V+E)` (vertices and edges)
