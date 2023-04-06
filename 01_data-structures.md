@@ -81,6 +81,7 @@ order | BST smallest to largest | root is always first | root is always last
 ### Overview
 - Complete unordered tree with root is the minimum
 - Guarantees `O(logn)` search (BST does not)
+- Can use `queue.PriorityQueue`, props: `get()`, `put()`, `qsize()`, `queue`
 - Ordering takes 
 - Represented by array
   - current: `arr[i]`
