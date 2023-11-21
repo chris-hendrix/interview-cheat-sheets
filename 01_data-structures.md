@@ -81,13 +81,23 @@ order | BST smallest to largest | root is always first | root is always last
 ### Overview
 - Complete unordered tree with root is the minimum
 - Guarantees `O(logn)` search (BST does not)
-- Can use `queue.PriorityQueue`, props: `get()`, `put()`, `qsize()`, `queue`
+- Can use `heapq`
 - Ordering takes 
 - Represented by array
   - current: `arr[i]`
   - parent: `arr[(i-1)/2]`
   - left: `arr[(2*i) + 1]`
   - right: `arr[(2*i )+ 2]`
+Example implementation of heapq
+```
+def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
+    heap = []
+    for x, y in points:
+        d = math.sqrt(x**2 + y**2)
+        heapq.heappush(heap, (d, [x, y]))
+    result = [heapq.heappop(heap)[1] for _ in range(k)]
+    return result
+```
 
 ### Complexity
 - Indexing:   Min Heap: `O(log n)`
