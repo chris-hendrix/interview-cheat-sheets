@@ -81,8 +81,8 @@ order | BST smallest to largest | root is always first | root is always last
 ### Overview
 - Complete unordered tree with root is the minimum
 - Guarantees `O(logn)` search (BST does not)
-- Can use `heapq`
-- Ordering takes 
+- Can use `heapq` as min heap
+    - to use `heapq` as a max heap, multiply values by `-1`
 - Represented by array
   - current: `arr[i]`
   - parent: `arr[(i-1)/2]`
