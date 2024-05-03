@@ -56,6 +56,22 @@ def dfs(node, adj={}):
     return adj
 ```
 
+### Bellman Ford (graphs)
+- Finds the shortest distance to all nodes from a starting node
+- **Complexity**
+  - `O(V*E)`
+```
+def bellman_ford(source, vertices, edges):
+    distances = {v: float('inf') for v in vertices}
+    distances[source] = 0
+
+    for _ in range(len(vertices) - 1):
+        for edge in edges:
+            if distances[edge.start] + edge.weight < distances[edge.end]:
+                distances[edge.start] = distances[edge.end] + edge.distance
+   return distances
+```
+
 ## Sorting
 | Algorithm | Worst | Average | Best | Memory |
 | --- | --- | --- | --- | --- |
