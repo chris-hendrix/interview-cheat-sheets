@@ -56,8 +56,9 @@ def dfs(node, adj={}):
     return adj
 ```
 
-### Bellman Ford (graphs)
+### Bellman Ford (weighted graphs)
 - Finds the shortest distance to all nodes from a starting node
+- Can't handle negative distances
 - **Complexity**
   - `O(V*E)`
 ```
