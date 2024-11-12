@@ -67,9 +67,8 @@ def bellman_ford(source, vertices, edges):
     distances[source] = 0
 
     for _ in range(len(vertices) - 1):
-        for edge in edges:
-            if distances[edge.start] + edge.weight < distances[edge.end]:
-                distances[edge.start] = distances[edge.end] + edge.distance
+        for start, end, weight in edges:
+            distances[end] = min(distances[end], distances[start] + weight)
    return distances
 ```
 
