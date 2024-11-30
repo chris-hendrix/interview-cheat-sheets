@@ -1,4 +1,4 @@
-# Interview cheat sheets
+# Interview prep
 Cheat sheets for 
 - data structures and algorithms
 - systems design
