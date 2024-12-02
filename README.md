@@ -7,7 +7,7 @@ Cheat sheets for
 ### Install
 Setup venv
 ```
-virtualenv -p $(which python3) venv
+python3 -m venv venv
 ```
 Activate venv and install packages
 ```
